@@ -14,7 +14,7 @@ export default function Home() {
           <NavbarNested />
         </Grid.Col>
         <Grid.Col span={9}>
-          <Title>Hello</Title>
+          <Title>Hello World</Title>
         </Grid.Col>
       </Grid>
     </>
