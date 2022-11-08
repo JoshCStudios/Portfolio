@@ -1,13 +1,12 @@
 import { Grid, Title } from "@mantine/core";
 import Head from "next/head";
 import Image from "next/image";
+import { GuestbookComponent } from "../components/Guestbook/GuestbookComponent";
 import { HeaderComponent } from "../components/Header";
 import { NavbarNested } from "../components/SideBar";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  // keyID: AKIAZHG36V2266VWI3V4
-  // eltZJlECg1ZdWm1vNLyvKK+WU4wI28yPPXrYFUb8
   return (
     <>
       <HeaderComponent />
@@ -16,7 +15,7 @@ export default function Home() {
           <NavbarNested />
         </Grid.Col>
         <Grid.Col span={9}>
-          <Title>Hello World</Title>
+          <GuestbookComponent />
         </Grid.Col>
       </Grid>
     </>
