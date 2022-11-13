@@ -68,6 +68,7 @@ interface LinksGroupProps {
   label: string;
   initiallyOpened?: boolean;
   links?: { label: string; link: string }[];
+  setActivePage: (activePage: string) => void;
 }
 
 export function LinksGroup({
@@ -75,6 +76,7 @@ export function LinksGroup({
   label,
   initiallyOpened,
   links,
+  setActivePage,
 }: LinksGroupProps) {
   const { classes, theme } = useStyles();
   const hasLinks = Array.isArray(links);
@@ -86,7 +88,10 @@ export function LinksGroup({
       className={classes.link}
       href={link.link}
       key={link.label}
-      onClick={(event) => event.preventDefault()}
+      onClick={(event) => {
+        event.preventDefault();
+        setActivePage(link.label);
+      }}
     >
       {link.label}
     </Text>
@@ -134,7 +139,11 @@ const mockdata = {
   ],
 };
 
-export function NavbarLinksGroup() {
+type NavbarLinksGroupProps = {
+  setActivePage: (activePage: string) => void;
+};
+
+export function NavbarLinksGroup({ setActivePage }: NavbarLinksGroupProps) {
   return (
     <Box
       sx={(theme) => ({
@@ -144,7 +153,7 @@ export function NavbarLinksGroup() {
           theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
       })}
     >
-      <LinksGroup {...mockdata} />
+      <LinksGroup {...mockdata} setActivePage={setActivePage} />
     </Box>
   );
 }

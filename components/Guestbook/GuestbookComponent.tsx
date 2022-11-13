@@ -1,4 +1,12 @@
-import { TextInput, Checkbox, Button, Group, Box, Text } from "@mantine/core";
+import {
+  TextInput,
+  Checkbox,
+  Button,
+  Group,
+  Box,
+  Text,
+  Card,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useEffect, useState } from "react";
 import { IsError } from "../../data/Types";
@@ -37,7 +45,15 @@ export function GuestbookComponent() {
   }, []);
 
   const renderMessages = () => {
-    return messages.map((m, i) => <Text key={i}>{m.message}</Text>);
+    return messages.map((m, i) => (
+      <Card key={i} withBorder>
+        <Text>
+          {m.name}
+          {": "}
+          {m.message}
+        </Text>
+      </Card>
+    ));
   };
 
   return (
@@ -62,11 +78,13 @@ export function GuestbookComponent() {
           />
 
           <Group position="right" mt="md">
-            <Button type="submit">Submit</Button>
+            <Button mb="sm" type="submit">
+              Submit
+            </Button>
           </Group>
         </form>
+        {renderMessages()}
       </Box>
-      {renderMessages()}
     </>
   );
 }

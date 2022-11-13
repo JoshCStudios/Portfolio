@@ -11,38 +11,17 @@ import {
 import { LinksGroup } from "./LinksGroup";
 
 const mockdata = [
-  { label: "Dashboard", icon: IconGauge },
+  { label: "Home", icon: IconGauge },
   {
-    label: "Market news",
+    label: "Applications",
     icon: IconNotes,
     initiallyOpened: true,
-    links: [
-      { label: "Overview", link: "/" },
-      { label: "Forecasts", link: "/" },
-      { label: "Outlook", link: "/" },
-      { label: "Real time", link: "/" },
-    ],
+    links: [{ label: "Guestbook", link: "/" }],
   },
   {
-    label: "Releases",
+    label: "Simple Math Applications",
     icon: IconCalendarStats,
-    links: [
-      { label: "Upcoming releases", link: "/" },
-      { label: "Previous releases", link: "/" },
-      { label: "Releases schedule", link: "/" },
-    ],
-  },
-  { label: "Analytics", icon: IconPresentationAnalytics },
-  { label: "Contracts", icon: IconFileAnalytics },
-  { label: "Settings", icon: IconAdjustments },
-  {
-    label: "Security",
-    icon: IconLock,
-    links: [
-      { label: "Enable 2FA", link: "/" },
-      { label: "Change password", link: "/" },
-      { label: "Recovery codes", link: "/" },
-    ],
+    links: [{ label: "Math Container", link: "/" }],
   },
 ];
 
@@ -82,11 +61,13 @@ const useStyles = createStyles((theme) => ({
     }`,
   },
 }));
-
-export function NavbarNested() {
+type SideBarProps = {
+  setActivePage: (activePage: string) => void;
+};
+export function SideBar({ setActivePage }: SideBarProps) {
   const { classes } = useStyles();
   const links = mockdata.map((item) => (
-    <LinksGroup {...item} key={item.label} />
+    <LinksGroup {...item} key={item.label} setActivePage={setActivePage} />
   ));
 
   return (
