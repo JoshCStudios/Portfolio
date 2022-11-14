@@ -15,7 +15,7 @@ const mockdata = [
   {
     label: "Applications",
     icon: IconNotes,
-    initiallyOpened: true,
+    initiallyOpened: false,
     links: [
       { label: "Guestbook", link: "/" },
       { label: "Pokedex", link: "/" },

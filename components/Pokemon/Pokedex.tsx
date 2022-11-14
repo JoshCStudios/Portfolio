@@ -47,15 +47,22 @@ export function Pokedex() {
     return <Image width={150} src={currentPokemon?.sprites.front_shiny} />;
   };
 
+  const displayCard = () => {
+    if (currentPokemon === undefined) return;
+    return (
+      <Card withBorder>
+        <Text>Pokemon name: {currentPokemon?.name}</Text>
+        <Text>Pokemon number: {currentPokemon?.id}</Text>
+        {displaySprite()}
+      </Card>
+    );
+  };
+
   return (
     <>
       <Box sx={{ maxWidth: 300 }} mx="auto">
         <Text>Welcome to the Pokedex. Search for a pokemon to fetch data.</Text>
-        <Card withBorder>
-          <Text>Pokemon name: {currentPokemon?.name}</Text>
-          <Text>Pokemon number: {currentPokemon?.id}</Text>
-          {displaySprite()}
-        </Card>
+        {displayCard()}
         <TextInput
           mb="sm"
           value={pokemonName}
