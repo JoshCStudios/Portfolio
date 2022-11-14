@@ -5,6 +5,7 @@ import { useState } from "react";
 import { GuestbookComponent } from "../components/Guestbook/GuestbookComponent";
 import { HeaderComponent } from "../components/Header";
 import { MathContainer } from "../components/MathComponents/MathContainer";
+import { Pokedex } from "../components/Pokemon/Pokedex";
 import { SideBar } from "../components/SideBar";
 import styles from "../styles/Home.module.css";
 
@@ -21,6 +22,7 @@ export default function Home() {
         <Grid.Col span={10}>
           {activePage === "Guestbook" && <GuestbookComponent />}
           {activePage === "Math Container" && <MathContainer />}
+          {activePage === "Pokedex" && <Pokedex />}
         </Grid.Col>
       </Grid>
     </>
