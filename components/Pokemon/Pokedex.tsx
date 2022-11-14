@@ -32,13 +32,12 @@ export function Pokedex() {
 
   const getPokemon = async () => {
     const response = await HttpGet<Pokemon>(
-      `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+      `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`
     );
     console.log(response);
 
     if (IsError(response)) return;
     setCurrentPokemon(response);
-    //setMessages(response);
   };
 
   const displaySprite = () => {
@@ -67,8 +66,6 @@ export function Pokedex() {
           mb="sm"
           value={pokemonName}
           onChange={setPokemonName}
-          withAsterisk
-          label="Name"
           placeholder="Enter Pokemon"
         />
         <Checkbox
