@@ -9,8 +9,8 @@ import {
   Image,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useInputState } from "@mantine/hooks";
-import { useEffect, useState } from "react";
+import { upperFirst, useInputState } from "@mantine/hooks";
+import { FormEvent, useEffect, useState } from "react";
 import { IsError } from "../../data/Types";
 import { HttpGet, HttpPost } from "../../services/HttpService";
 
@@ -30,7 +30,9 @@ export function Pokedex() {
   const [currentPokemon, setCurrentPokemon] = useState<Pokemon | undefined>();
   const [checked, setChecked] = useState(false);
 
-  const getPokemon = async () => {
+  const getPokemon = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
     const response = await HttpGet<Pokemon>(
       `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`
     );
@@ -50,7 +52,7 @@ export function Pokedex() {
     if (currentPokemon === undefined) return;
     return (
       <Card withBorder>
-        <Text>Pokemon name: {currentPokemon?.name}</Text>
+        <Text>Pokemon name: {upperFirst(currentPokemon?.name)}</Text>
         <Text>Pokemon number: {currentPokemon?.id}</Text>
         {displaySprite()}
       </Card>
@@ -62,20 +64,22 @@ export function Pokedex() {
       <Box sx={{ maxWidth: 300 }} mx="auto">
         <Text>Welcome to the Pokedex. Search for a pokemon to fetch data.</Text>
         {displayCard()}
-        <TextInput
-          mb="sm"
-          value={pokemonName}
-          onChange={setPokemonName}
-          placeholder="Enter Pokemon"
-        />
-        <Checkbox
-          label="Shiny"
-          checked={checked}
-          onChange={(event) => setChecked(event.currentTarget.checked)}
-        />
-        <Group position="right" mt="md">
-          <Button onClick={getPokemon}>Search</Button>
-        </Group>
+        <form onSubmit={(e) => getPokemon(e)}>
+          <TextInput
+            mb="sm"
+            value={pokemonName}
+            onChange={setPokemonName}
+            placeholder="Enter Pokemon"
+          />
+          <Checkbox
+            label="Shiny"
+            checked={checked}
+            onChange={(event) => setChecked(event.currentTarget.checked)}
+          />
+          <Group position="right" mt="md">
+            <Button type="submit">Search</Button>
+          </Group>
+        </form>
       </Box>
     </>
   );
